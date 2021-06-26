@@ -1,0 +1,2 @@
+rootProject.name = "madarSoftDbDemo"
+include ':app'

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_size_16"
+    android:layout_marginLeft="@dimen/margin_size_16"
+    android:layout_marginTop="@dimen/margin_size_16"
+    android:layout_marginEnd="@dimen/margin_size_16"
+    android:layout_marginRight="@dimen/margin_size_16"
+    android:background="@color/teal_200"
+    android:padding="@dimen/margin_size_8">
+
+    <TextView
+        android:id="@+id/gender_recycler_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/str_gender_recycler_item"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gender_value_recycler_item"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/gender_value_recycler_item"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/gender_recycler_item"
+        app:layout_constraintTop_toBottomOf="@+id/job_title_value_recycler_item"
+        tools:text="Male" />
+
+    <TextView
+        android:id="@+id/job_title_recycler_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/str_job_title_recycler_item"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/job_title_value_recycler_item"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/job_title_value_recycler_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/job_title_recycler_item"
+        app:layout_constraintTop_toBottomOf="@+id/age_value_recycler_item"
+        tools:text="Android Dev" />
+
+    <TextView
+        android:id="@+id/name_value_recycler_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/name_recycler_item"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nooreldin Elsayed" />
+
+    <TextView
+        android:id="@+id/name_recycler_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/str_name_recycler_item"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/name_value_recycler_item"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/age_recycler_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/str_age_recycler_item"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintBaseline_toBaselineOf="@+id/age_value_recycler_item"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/age_value_recycler_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/name_recycler_item_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/age_recycler_item"
+        app:layout_constraintTop_toBottomOf="@+id/name_value_recycler_item"
+        tools:text="24" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">madarSoftDbDemo</string>
+    <string name="str_add_user_button">"Add user "</string>
+    <string name="str_name_recycler_item">Name:</string>
+    <string name="str_age_recycler_item">Age:</string>
+    <string name="str_job_title_recycler_item">Job Title:</string>
+    <string name="str_gender_recycler_item">Gender:</string>
+
+    <string name="str_user_name_edit_text_view">Name</string>
+    <string name="str_user_age_edit_text_view">Age</string>
+    <string name="str_user_job_title_edit_text_view">Job Title</string>
+    <string name="str_user_gender_edit_text_view">Gender</string>
+    <string name="str_save_user_data_edit_text_view">Enter</string>
+
+    <string name="str_save_user_to_db">save</string>
+
+    <string name="str_show_user_into_screen">Display Users</string>
+
+
+</resources>
+
