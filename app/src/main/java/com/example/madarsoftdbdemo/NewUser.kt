@@ -37,6 +37,12 @@ class NewUser : AppCompatActivity() {
 
     private fun insertUser(){
 
+        if(editTextFieldsAreEmpty()){
+
+            Toast.makeText(this, "Fill All fields!!", Toast.LENGTH_LONG).show()
+            return
+        }
+
         val name = binding.nameEditTextView.text.toString().trim(){it <= ' '}
         val age = binding.ageEditTextView.text.toString().trim(){it <= ' '}
         val jobTitle = binding.jobTitleEditTextView.text.toString().trim(){it <= ' '}
@@ -69,6 +75,8 @@ class NewUser : AppCompatActivity() {
 
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater : MenuInflater = menuInflater
         inflater.inflate(R.menu.action_bar_menu, menu)
@@ -82,7 +90,6 @@ class NewUser : AppCompatActivity() {
             R.id.save_user -> {
 
                 insertUser()
-                clearEditTextFields()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -90,19 +97,22 @@ class NewUser : AppCompatActivity() {
         }
     }
 
-    private fun clearEditTextFields() {
-
-        binding.nameEditTextView.text.clear()
-        binding.ageEditTextView.text.clear()
-        binding.jobTitleEditTextView.text.clear()
-        binding.genderEditTextView.text.clear()
-
-    }
-
     private fun transitionToUssersPage(){
 
         val intent = Intent(this, UsersPage::class.java)
         startActivity(intent)
+
+    }
+
+    private fun editTextFieldsAreEmpty(): Boolean {
+
+        if(binding.nameEditTextView.text.isEmpty() || binding.ageEditTextView.text.isEmpty() || binding.jobTitleEditTextView.text.isEmpty() || binding.genderEditTextView.text.isEmpty()){
+
+            return true
+        }
+        else
+            return false
+
 
     }
 
