@@ -1,29 +1,30 @@
 package com.example.madarsoftdbdemo
 
 import android.content.Intent
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_AGE
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_GENDER
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_JOB_TITLE
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_NAME
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.TABLE_NAME
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry._ID
+import androidx.room.Room
 import com.example.madarsoftdbdemo.data.User
 import com.example.madarsoftdbdemo.data.UserDatabase
-import com.example.madarsoftdbdemo.data.UsersDBHelper
+import com.example.madarsoftdbdemo.data.UserViewModel
 import com.example.madarsoftdbdemo.databinding.ActivityUsersPageBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class UsersPage : AppCompatActivity() {
 
     private lateinit var binding: ActivityUsersPageBinding
 
-    private lateinit var db: UserDatabase
+    private lateinit var mUserViewModel: UserViewModel
 
-    private lateinit var mDBhelper : UsersDBHelper
+    //private lateinit var db: UserDatabase
+
+    //private lateinit var mDBhelper : UsersDBHelper
 
     private lateinit var linearLayoutManager : LinearLayoutManager
     private lateinit var adapter: UsersAdapter
@@ -38,11 +39,10 @@ class UsersPage : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        db = UserDatabase.getInstance(this)
+        //db = UserDatabase.getInstance(this)
 
-        Thread{
-            displayUsers()
-        }.start()
+        displayUsers()
+
 
 
 
@@ -57,9 +57,12 @@ class UsersPage : AppCompatActivity() {
 
     private fun displayUsers() {
 
-        retrieveUsersfFromDB()
 
         addUsersToRecyclerView()
+
+        retrieveUsersfFromDB()
+
+
 
 
     }
@@ -68,7 +71,13 @@ class UsersPage : AppCompatActivity() {
 
     private fun retrieveUsersfFromDB() {
 
-            usersList = db.userDao().readAllData() as ArrayList<User>
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        mUserViewModel.readAllData.observe(this, Observer { user ->
+
+            adapter.setData(user)
+
+        })
+
 
 
 
@@ -103,30 +112,25 @@ class UsersPage : AppCompatActivity() {
 
     private fun addUsersToRecyclerView() {
 
-            linearLayoutManager = LinearLayoutManager(this)
-            binding.recyclerView.layoutManager= linearLayoutManager
 
-            adapter = UsersAdapter(usersList)
-            binding.recyclerView.adapter = adapter
+        adapter = UsersAdapter()
+        binding.recyclerView.adapter = adapter
 
+        linearLayoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = linearLayoutManager
 
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        usersList.clear()
-        Thread{
-            displayUsers()
-        }.start()
 
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        displayUsers()
+//    }
 
     fun addNewUser(view : View){
 
         val intent = Intent(this, NewUser::class.java)
         startActivity(intent)
-
     }
 
 }

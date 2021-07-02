@@ -7,12 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madarsoftdbdemo.data.User
 
-class UsersAdapter(private var usersList : MutableList<User>) : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
+class UsersAdapter() : RecyclerView.Adapter<UsersAdapter.UsersViewHolder>() {
+
+    private var usersList = emptyList<User>()
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): UsersAdapter.UsersViewHolder {
+    ): UsersViewHolder {
 
         val context = viewGroup.context
         val inflater = LayoutInflater.from(context)
@@ -23,7 +25,7 @@ class UsersAdapter(private var usersList : MutableList<User>) : RecyclerView.Ada
         return UsersViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: UsersAdapter.UsersViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
 
         val item = usersList[position]
         holder.bindUser(item)
@@ -75,5 +77,11 @@ class UsersAdapter(private var usersList : MutableList<User>) : RecyclerView.Ada
 
         }
 
+    }
+
+    fun setData(user: List<User>){
+
+        this.usersList = user
+        notifyDataSetChanged()
     }
 }

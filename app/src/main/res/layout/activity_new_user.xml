@@ -61,4 +61,11 @@
         android:layout_marginTop="@dimen/margin_size_16"
         android:text="@string/str_show_user_into_screen" />
 
+    <Button
+        android:id="@+id/save_user_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_16"
+        android:text="@string/str_save_users_button" />
+
 </LinearLayout>

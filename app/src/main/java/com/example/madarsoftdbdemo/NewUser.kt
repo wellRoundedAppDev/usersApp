@@ -1,6 +1,5 @@
 package com.example.madarsoftdbdemo
 
-import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,21 +7,22 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_AGE
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_GENDER
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_JOB_TITLE
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.COLUMN_NAME
-import com.example.madarsoftdbdemo.data.DatabaseManager.UserEntry.TABLE_NAME
+import androidx.lifecycle.ViewModelProvider
 import com.example.madarsoftdbdemo.data.User
 import com.example.madarsoftdbdemo.data.UserDatabase
-import com.example.madarsoftdbdemo.data.UsersDBHelper
+import com.example.madarsoftdbdemo.data.UserViewModel
 import com.example.madarsoftdbdemo.databinding.ActivityNewUserBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class NewUser : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewUserBinding
 
-    private lateinit var db: UserDatabase
+    //private lateinit var db: UserDatabase
+
+    private lateinit var mUserViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,12 +31,21 @@ class NewUser : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        db = UserDatabase.getInstance(this)
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        //db = UserDatabase.getInstance(this)
+
+        binding.saveUserButton.setOnClickListener {
+
+                insertUser()
+
+        }
 
         binding.displayUsersButton.setOnClickListener {
 
             transitionToUssersPage()
         }
+
 
 
     }
@@ -54,7 +63,11 @@ class NewUser : AppCompatActivity() {
         val jobTitle = binding.jobTitleEditTextView.text.toString().trim(){it <= ' '}
         val gender = binding.genderEditTextView.text.toString().trim(){it <= ' '}
 
-        db.userDao().addUser(User(0, name, age.toInt(), jobTitle, gender))
+        mUserViewModel.addUser(User(0, name, age.toInt(), jobTitle, gender))
+        Toast.makeText(this, "New user added", Toast.LENGTH_SHORT).show()
+
+
+
 
 
 
@@ -94,22 +107,22 @@ class NewUser : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when(item.itemId){
-
-            R.id.save_user -> {
-
-                Thread{
-                    insertUser()
-                }.start()
-
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//
+//        return when(item.itemId){
+//
+//            R.id.save_user -> {
+//
+//                Thread{
+//                    insertUser()
+//                }.start()
+//
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//
+//        }
+//    }
 
     private fun transitionToUssersPage(){
 
